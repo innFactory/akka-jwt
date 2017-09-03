@@ -11,6 +11,7 @@ libraryDependencies ++= {
     Library.log4jCore,
     Library.slf4jLog4jBridge,
     Library.akkaLog4j,
+    Library.scalacacheGuava,
     TestLibrary.akkaTestkit,
     TestLibrary.akkaHttpTestkit,
     TestLibrary.scalaTest

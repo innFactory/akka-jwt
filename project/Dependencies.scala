@@ -7,6 +7,7 @@ object Version {
   final val Scala = "2.11.8"
   final val AkkaLog4j = "1.4.0"
   final val Log4j = "2.8.2"
+  final val scalacacheGuava = "0.9.4"
 }
 
 object Library {
@@ -19,6 +20,7 @@ object Library {
   val slf4jLog4jBridge = "org.apache.logging.log4j" % "log4j-slf4j-impl" % Version.Log4j
   val akkaLog4j = "de.heikoseeberger" %% "akka-log4j" % Version.AkkaLog4j
 
+  val scalacacheGuava = "com.github.cb372" %% "scalacache-guava" % Version.scalacacheGuava
 }
 
 object TestVersion {
