@@ -1,5 +1,6 @@
 package de.innfactory.akka
 
+import akka.http.javadsl.server.Rejections
 import akka.http.scaladsl.server.Directive1
 import akka.http.scaladsl.server.directives.{
   BasicDirectives,
@@ -18,7 +19,7 @@ trait JwtAuthDirectives {
   def authenticate: Directive1[(JwtToken, JWTClaimsSet)] = {
     headerValueByName("Authorization").flatMap { token =>
       jwtValidator.validate(JwtToken(token)) match {
-        case Left(error)   => reject
+        case Left(error)   => reject(Rejections.authorizationFailed)
         case Right(result) => provide(result)
       }
     }

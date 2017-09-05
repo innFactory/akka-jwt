@@ -1,5 +1,5 @@
 name := "akka-jwt"
-version := "1.0.3"
+version := "1.0.4"
 organization := "de.innfactory"
 description := "akka-http jwt auth directive"
 scalaVersion := Version.Scala
@@ -44,7 +44,7 @@ crossScalaVersions := Seq("2.11.11", scalaVersion.value)
 licenses += ("Apache-2.0", url(
   "http://www.apache.org/licenses/LICENSE-2.0.txt"))
 bintrayOrganization := Some("innfactory")
+bintrayRepository := "sbt-plugins"
 bintrayPackageLabels := Seq("JWT", "Scala", "akka-http", "cognito")
 bintrayVcsUrl := Some("https://github.com/innFactory/akka-jwt")
 publishMavenStyle := true
-bintrayRepository := "akka-jwt"

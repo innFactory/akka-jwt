@@ -33,17 +33,21 @@ final case class AWSRegion(region: AWSRegions.Region) extends AnyVal
 
 final case class CognitoUserPoolId(value: String) extends AnyVal
 
+final case class TokenUseClaim(value: String = "id") extends AnyVal
+
 object AwsCognitoJwtValidator {
   def apply(
       awsRegion: AWSRegion,
-      cognitoUserPoolId: CognitoUserPoolId
+      cognitoUserPoolId: CognitoUserPoolId,
+      tokenUseClaim: TokenUseClaim
   ): AwsCognitoJwtValidator =
-    new AwsCognitoJwtValidator(awsRegion, cognitoUserPoolId)
+    new AwsCognitoJwtValidator(awsRegion, cognitoUserPoolId, tokenUseClaim)
 }
 
 final class AwsCognitoJwtValidator(
     awsRegion: AWSRegion,
-    cognitoUserPoolId: CognitoUserPoolId
+    cognitoUserPoolId: CognitoUserPoolId,
+    tokenUseClaim: TokenUseClaim
 ) extends JwtValidator {
 
   import ProvidedAdditionalChelcks._
@@ -64,7 +68,7 @@ final class AwsCognitoJwtValidator(
       keySource = jwkSet,
       additionalChecks = List(
         requireExpirationClaim,
-        requireTokenUseClaim("access"),
+        requireTokenUseClaim(tokenUseClaim.value),
         requiredIssuerClaim(cognitoIdpUrl),
         requiredNonEmptySubject
       )
