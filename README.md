@@ -1,5 +1,11 @@
 # akka-jwt
-Library for authentication with akka
+[![travis-ci.org](https://travis-ci.org/innFactory/akka-jwt.svg?branch=master)](https://travis-ci.org/innFactory/akka-jwt)
+[![codecov.io](https://img.shields.io/codecov/c/github/innFactory/akka-jwt/master.svg?style=flat)](https://codecov.io/github/innFactory/akka-jwt)
+[![shields.io](http://img.shields.io/badge/license-Apache2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+[![innFactory.de](https://img.shields.io/badge/Version-1.0-brightgreen.svg)](https://innFactory.de)
+
+Library for jwt authentication with akka
+
 
 ## Information
 This library provides you an akka directive for your route to authenticate your user with jwt. the jwt implementation adapts nimbus JOSE + JWT.
@@ -75,3 +81,12 @@ val cognitoUserPoolId = CognitoUserPoolId(value = "...")
 
 val awsCognitoJwtValidator = AwsCognitoJwtValidator(awsRegion, cognitoUserPoolId)
 ```
+
+
+## Copyright & Contributers
+Thanks to guizmaii's template for nimbus integration in scala.
+Tobias Jonas
+
+Copyright (C) 2017 [innFactory Cloud- & DataEngineering](https://innFactory.de)
+
+Published under the Apache 2 License.
