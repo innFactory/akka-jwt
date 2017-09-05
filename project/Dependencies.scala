@@ -4,7 +4,7 @@ object Version {
   final val akka = "2.5.3"
   final val akkaHttp = "10.0.8"
   final val akkaHttpSprayJson =  "10.0.9"
-  final val Scala = "2.11.8"
+  final val Scala = "2.12.3"
   final val AkkaLog4j = "1.4.0"
   final val Log4j = "2.8.2"
   final val nimbusJwt = "5.1"
