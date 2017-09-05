@@ -2,7 +2,7 @@
 [![travis-ci.org](https://travis-ci.org/innFactory/akka-jwt.svg?branch=master)](https://travis-ci.org/innFactory/akka-jwt)
 [![codecov.io](https://img.shields.io/codecov/c/github/innFactory/akka-jwt/master.svg?style=flat)](https://codecov.io/github/innFactory/akka-jwt)
 [![shields.io](http://img.shields.io/badge/license-Apache2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-[ ![Download](https://api.bintray.com/packages/innfactory/akka-jwt/akka-jwt/images/download.svg) ](https://bintray.com/innfactory/akka-jwt/akka-jwt/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/innfactory/sbt-plugins/akka-jwt/images/download.svg) ](https://bintray.com/innfactory/sbt-plugins/akka-jwt/_latestVersion)
 
 Library for jwt authentication with akka
 
