@@ -29,29 +29,31 @@ object AWSRegions extends Enumeration {
   implicit def valueToRegion(v: Value): Region = v.asInstanceOf[Region]
 }
 
-
 final case class AWSRegion(region: AWSRegions.Region) extends AnyVal
 
 final case class CognitoUserPoolId(value: String) extends AnyVal
 
 object AwsCognitoJwtValidator {
   def apply(
-             awsRegion: AWSRegion,
-             cognitoUserPoolId: CognitoUserPoolId
-           ): AwsCognitoJwtValidator = new AwsCognitoJwtValidator(awsRegion, cognitoUserPoolId)
+      awsRegion: AWSRegion,
+      cognitoUserPoolId: CognitoUserPoolId
+  ): AwsCognitoJwtValidator =
+    new AwsCognitoJwtValidator(awsRegion, cognitoUserPoolId)
 }
 
 final class AwsCognitoJwtValidator(
-                                    awsRegion: AWSRegion,
-                                    cognitoUserPoolId: CognitoUserPoolId
-                                  ) extends JwtValidator {
+    awsRegion: AWSRegion,
+    cognitoUserPoolId: CognitoUserPoolId
+) extends JwtValidator {
 
   import ProvidedAdditionalChelcks._
 
-  val cognitoIdpUrl = s"https://cognito-idp.${awsRegion.region.regionCode}.amazonaws.com/${cognitoUserPoolId.value}"
+  val cognitoIdpUrl =
+    s"https://cognito-idp.${awsRegion.region.regionCode}.amazonaws.com/${cognitoUserPoolId.value}"
   val cognitoIdpJwkUrl = s"$cognitoIdpUrl/.well-known/jwks.json"
 
-  private val jwkSet: JWKSource[SecurityContext] = new RemoteJWKSet(new URL(cognitoIdpJwkUrl))
+  private val jwkSet: JWKSource[SecurityContext] = new RemoteJWKSet(
+    new URL(cognitoIdpJwkUrl))
 
   /**
     * The additional checks come from the AWS Cognito documentation:
@@ -68,6 +70,7 @@ final class AwsCognitoJwtValidator(
       )
     )
 
-  override def validate(jwtToken: JwtToken): Either[BadJWTException, (JwtToken, JWTClaimsSet)] =
+  override def validate(
+      jwtToken: JwtToken): Either[BadJWTException, (JwtToken, JWTClaimsSet)] =
     configurableJwtValidator.validate(jwtToken)
 }

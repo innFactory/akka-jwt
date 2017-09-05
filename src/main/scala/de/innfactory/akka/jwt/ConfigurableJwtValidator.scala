@@ -6,7 +6,11 @@ import com.nimbusds.jose.JWSAlgorithm
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.{JWSVerificationKeySelector, SecurityContext}
 import com.nimbusds.jwt.JWTClaimsSet
-import com.nimbusds.jwt.proc.{BadJWTException, DefaultJWTClaimsVerifier, DefaultJWTProcessor}
+import com.nimbusds.jwt.proc.{
+  BadJWTException,
+  DefaultJWTClaimsVerifier,
+  DefaultJWTProcessor
+}
 
 import scala.util.{Failure, Success, Try}
 
@@ -14,8 +18,11 @@ object ConfigurableJwtValidator {
   def apply(
       keySource: JWKSource[SecurityContext],
       maybeCtx: Option[SecurityContext] = None,
-      additionalChecks: List[(JWTClaimsSet, SecurityContext) => Option[BadJWTException]] = List.empty
-  ): ConfigurableJwtValidator = new ConfigurableJwtValidator(keySource, maybeCtx, additionalChecks)
+      additionalChecks: List[(JWTClaimsSet,
+                              SecurityContext) => Option[BadJWTException]] =
+        List.empty
+  ): ConfigurableJwtValidator =
+    new ConfigurableJwtValidator(keySource, maybeCtx, additionalChecks)
 }
 
 /**
@@ -31,7 +38,9 @@ object ConfigurableJwtValidator {
 final class ConfigurableJwtValidator(
     keySource: JWKSource[SecurityContext],
     maybeCtx: Option[SecurityContext] = None,
-    additionalChecks: List[(JWTClaimsSet, SecurityContext) => Option[BadJWTException]] = List.empty
+    additionalChecks: List[(JWTClaimsSet,
+                            SecurityContext) => Option[BadJWTException]] =
+      List.empty
 ) extends JwtValidator {
 
   // Set up a JWT processor to parse the tokens and then check their signature
@@ -41,27 +50,31 @@ final class ConfigurableJwtValidator(
   private val expectedJWSAlg = JWSAlgorithm.RS256
   // Configure the JWT processor with a key selector to feed matching public
   // RSA keys sourced from the JWK set URL
-  private val keySelector = new JWSVerificationKeySelector[SecurityContext](expectedJWSAlg, keySource)
+  private val keySelector =
+    new JWSVerificationKeySelector[SecurityContext](expectedJWSAlg, keySource)
   jwtProcessor.setJWSKeySelector(keySelector)
 
   // Set the additional checks.
   //
   // Updated and adapted version of this example:
   //   https://connect2id.com/products/nimbus-jose-jwt/examples/validating-jwt-access-tokens#claims-validator
-  jwtProcessor.setJWTClaimsSetVerifier(new DefaultJWTClaimsVerifier[SecurityContext] {
-    override def verify(claimsSet: JWTClaimsSet, context: SecurityContext): Unit = {
-      super.verify(claimsSet, context)
+  jwtProcessor.setJWTClaimsSetVerifier(
+    new DefaultJWTClaimsVerifier[SecurityContext] {
+      override def verify(claimsSet: JWTClaimsSet,
+                          context: SecurityContext): Unit = {
+        super.verify(claimsSet, context)
 
-      additionalChecks.toStream
-        .map(f => f(claimsSet, context))
-        .collect { case Some(e) => e }
-        .foreach(e => throw e)
-    }
-  })
+        additionalChecks.toStream
+          .map(f => f(claimsSet, context))
+          .collect { case Some(e) => e }
+          .foreach(e => throw e)
+      }
+    })
 
   private val ctx: SecurityContext = maybeCtx.orNull
 
-  override def validate(jwtToken: JwtToken): Either[BadJWTException, (JwtToken, JWTClaimsSet)] = {
+  override def validate(
+      jwtToken: JwtToken): Either[BadJWTException, (JwtToken, JWTClaimsSet)] = {
     val content: String = jwtToken.content
     if (content.isEmpty) Left(EmptyJwtTokenContent)
     else

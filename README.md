@@ -2,7 +2,7 @@
 [![travis-ci.org](https://travis-ci.org/innFactory/akka-jwt.svg?branch=master)](https://travis-ci.org/innFactory/akka-jwt)
 [![codecov.io](https://img.shields.io/codecov/c/github/innFactory/akka-jwt/master.svg?style=flat)](https://codecov.io/github/innFactory/akka-jwt)
 [![shields.io](http://img.shields.io/badge/license-Apache2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-[![innFactory.de](https://img.shields.io/badge/Version-1.0-brightgreen.svg)](https://innFactory.de)
+[ ![Download](https://api.bintray.com/packages/innfactory/akka-jwt/akka-jwt/images/download.svg) ](https://bintray.com/innfactory/akka-jwt/akka-jwt/_latestVersion)
 
 Library for jwt authentication with akka
 
@@ -11,7 +11,7 @@ Library for jwt authentication with akka
 This library provides you an akka directive for your route to authenticate your user with jwt. the jwt implementation adapts nimbus JOSE + JWT.
 
 ### Setup
-`libraryDependencies += "de.innFactory" %% "akka-jwt" % "1.0.0"`
+`libraryDependencies += "de.innFactory" %% "akka-jwt" % "x.x.x"`
 
 After that you must extend your akka-http Route with ```JwtAuthDirectives```. Then just override ```protected val jwtValidator: JwtValidator```
 

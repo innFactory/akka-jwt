@@ -1,9 +1,9 @@
 name := "akka-jwt"
-version := "1.0.0"
+version := "1.0.3"
+organization := "de.innfactory"
+description := "akka-http jwt auth directive"
 scalaVersion := Version.Scala
 
-scalafmtOnCompile in ThisBuild := true
-crossScalaVersions in ThisBuild := Seq("2.11.8", "2.11.11", scalaVersion.value)
 scalafmtVersion := "1.2.0"
 
 scalacOptions ++= Seq(
@@ -20,7 +20,7 @@ scalacOptions ++= Seq(
   "-Xlint",
   "-Xlint:missing-interpolator",
   "-Yno-adapted-args",
-  "-Ywarn-unused",
+  //"-Ywarn-unused",
   "-Ywarn-dead-code",
   "-Ywarn-numeric-widen",
   "-Ywarn-value-discard",
@@ -30,22 +30,21 @@ scalacOptions ++= Seq(
 
 libraryDependencies ++= {
   Seq(
-    Library.akkaActor,
     Library.akkaHttp,
-    Library.akkaStream,
-    Library.log4jCore,
-    Library.slf4jLog4jBridge,
-    Library.akkaLog4j,
     Library.nimbusJwt,
-    TestLibrary.akkaTestkit,
-    TestLibrary.akkaHttpTestkit,
     TestLibrary.scalaTest,
     TestLibrary.scalaCheck
   )
 }
 
+scalafmtOnCompile := true
+crossScalaVersions := Seq("2.11.11", scalaVersion.value)
+
 // sbt-bintray options
 licenses += ("Apache-2.0", url(
   "http://www.apache.org/licenses/LICENSE-2.0.txt"))
-bintrayOrganization := Some("innFactory")
-bintrayPackageLabels := Seq("JWT", "Scala")
+bintrayOrganization := Some("innfactory")
+bintrayPackageLabels := Seq("JWT", "Scala", "akka-http", "cognito")
+bintrayVcsUrl := Some("https://github.com/innFactory/akka-jwt")
+publishMavenStyle := true
+bintrayRepository := "akka-jwt"
