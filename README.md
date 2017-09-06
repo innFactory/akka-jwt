@@ -11,7 +11,10 @@ Library for jwt authentication with akka
 This library provides you an akka directive for your route to authenticate your user with jwt. the jwt implementation adapts nimbus JOSE + JWT.
 
 ### Setup
-`libraryDependencies += "de.innFactory" %% "akka-jwt" % "x.x.x"`
+```scala
+resolvers += Resolver.bintrayRepo("innfactory", "sbt-plugins")
+libraryDependencies += "de.innFactory" %% "akka-jwt" % "x.x.x"
+```
 
 After that you must extend your akka-http Route with ```JwtAuthDirectives```. Then just override ```protected val jwtValidator: JwtValidator```
 
