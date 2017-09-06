@@ -17,6 +17,7 @@ object TestVersion {
 }
 
 object TestLibrary {
+  val akkaHttp = "com.typesafe.akka" %% "akka-http-testkit"  % Version.akkaHttp
   val scalaTest = "org.scalatest" %% "scalatest" % TestVersion.scalaTest % "test"
   val scalaCheck = "org.scalacheck" %% "scalacheck"     % TestVersion.scalaCheck % "test"
 }

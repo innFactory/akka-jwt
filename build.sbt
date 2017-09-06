@@ -1,5 +1,5 @@
 name := "akka-jwt"
-version := "1.0.5"
+version := "1.0.7"
 organization := "de.innfactory"
 description := "akka-http jwt auth directive"
 scalaVersion := Version.Scala
@@ -32,6 +32,7 @@ libraryDependencies ++= {
   Seq(
     Library.akkaHttp,
     Library.nimbusJwt,
+    TestLibrary.akkaHttp,
     TestLibrary.scalaTest,
     TestLibrary.scalaCheck
   )
@@ -47,4 +48,24 @@ bintrayOrganization := Some("innfactory")
 bintrayRepository := "sbt-plugins"
 bintrayPackageLabels := Seq("JWT", "Scala", "akka-http", "cognito")
 bintrayVcsUrl := Some("https://github.com/innFactory/akka-jwt")
+homepage := Some(url("https://github.com/innFactory/akka-jwt"))
 publishMavenStyle := true
+
+pomExtra :=
+  <scm>
+    <url>git@github.com:innFactory/akka-jwt.git</url>
+    <connection>scm:git:git@github.com:innFactory/akka-jwt.git</connection>
+  </scm>
+    <developers>
+      <developer>
+        <id>innFactory</id>
+        <name>Tobias Jonas</name>
+        <email>info@innFactory.de</email>
+        <url>https://innFactory.de/</url>
+        <organization>innFactory</organization>
+        <organizationUrl>https://innFactory.de/</organizationUrl>
+        <roles>
+          <role>CEO</role>
+        </roles>
+      </developer>
+    </developers>

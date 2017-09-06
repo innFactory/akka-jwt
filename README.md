@@ -12,7 +12,7 @@ This library provides you an akka directive for your route to authenticate your 
 
 ### Setup
 ```scala
-resolvers += Resolver.bintrayRepo("innfactory", "sbt-plugins")
+resolvers += Resolver.bintrayRepo("innfactory", "sbt-plugins") // or via maven central
 libraryDependencies += "de.innFactory" %% "akka-jwt" % "x.x.x"
 ```
 
