@@ -296,7 +296,7 @@ class ConfigurableJwtValidatorSpec
       }
       "and present but not the one expected" should {
         "returns Left(InvalidTokenIssuerClaim)" in {
-          val issuer = "https://guizmaii.com"
+          val issuer = "https://innFactory.de"
           val claims =
             new JWTClaimsSet.Builder().issuer(issuer).subject("alice").build
           val jwt = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256), claims)
@@ -321,7 +321,7 @@ class ConfigurableJwtValidatorSpec
       }
       "present and valide" should {
         "returns Right(token -> claimSet)" in {
-          val issuer = "https://guizmaii.com"
+          val issuer = "https://innFactory.de"
           val claims =
             new JWTClaimsSet.Builder().issuer(issuer).subject("alice").build
           val jwt = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256), claims)
