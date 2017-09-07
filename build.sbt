@@ -1,5 +1,5 @@
 name := "akka-jwt"
-version := "1.0.7"
+version := "1.1.1"
 organization := "de.innfactory"
 description := "akka-http jwt auth directive"
 scalaVersion := Version.Scala
@@ -20,7 +20,7 @@ scalacOptions ++= Seq(
   "-Xlint",
   "-Xlint:missing-interpolator",
   "-Yno-adapted-args",
-  //"-Ywarn-unused",
+  "-Ywarn-unused",
   "-Ywarn-dead-code",
   "-Ywarn-numeric-widen",
   "-Ywarn-value-discard",

@@ -16,7 +16,7 @@ resolvers += Resolver.bintrayRepo("innfactory", "sbt-plugins") // or via maven c
 libraryDependencies += "de.innFactory" %% "akka-jwt" % "x.x.x"
 ```
 
-After that you must extend your akka-http Route with ```JwtAuthDirectives```. Then just override ```protected val jwtValidator: JwtValidator```
+After that you must extend your akka-http Route with ```JwtAuthDirectives```. Then just implement a AuthService ```protected val authService: AuthService```
 
 After that you can build your route like this: 
 
