@@ -91,9 +91,9 @@ https://github.com/innFactory/aws-session-token-gui
 
 
 ## Copyright & Contributers
-Thanks to guizmaii's template for nimbus integration in scala.
 
-Tobias Jonas
+* Tobias Jonas
+* Jules Ivanic 
 
 Copyright (C) 2017 [innFactory Cloud- & DataEngineering](https://innFactory.de)
 
