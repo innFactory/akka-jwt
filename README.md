@@ -12,8 +12,7 @@ This library provides you an akka directive for your route to authenticate your 
 
 ### Setup
 ```scala
-resolvers += Resolver.bintrayRepo("innfactory", "sbt-plugins") // or via maven central
-libraryDependencies += "de.innFactory" %% "akka-jwt" % "x.x.x"
+libraryDependencies += "de.innFactory" %% "akka-jwt" % "1.1.1"
 ```
 
 After that you must extend your akka-http Route with ```JwtAuthDirectives```. Then just implement a AuthService ```protected val authService: AuthService```
@@ -85,9 +84,15 @@ val cognitoUserPoolId = CognitoUserPoolId(value = "...")
 val awsCognitoJwtValidator = AwsCognitoJwtValidator(awsRegion, cognitoUserPoolId)
 ```
 
+Need a token generator for aws? Look at
+
+https://innfactory.de/de/blog/34-software-engineering/52-javascript-desktop-app-electron
+https://github.com/innFactory/aws-session-token-gui
+
 
 ## Copyright & Contributers
 Thanks to guizmaii's template for nimbus integration in scala.
+
 Tobias Jonas
 
 Copyright (C) 2017 [innFactory Cloud- & DataEngineering](https://innFactory.de)
