@@ -1,5 +1,5 @@
 name := "akka-jwt"
-version := "1.1.1"
+version := "1.1.2"
 organization := "de.innfactory"
 description := "akka-http jwt auth directive"
 scalaVersion := Version.Scala
