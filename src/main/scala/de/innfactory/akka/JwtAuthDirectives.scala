@@ -18,13 +18,23 @@ trait JwtAuthDirectives {
   import HeaderDirectives._
   import RouteDirectives._
 
+  private val headerTokenRegex = """Bearer (.+?)""".r
+
+  private def extractBearerToken(header: String): String = {
+    header match {
+      case headerTokenRegex(token) => token
+      case token => token
+    }
+  }
+
   def authenticate: Directive1[(JwtToken, JWTClaimsSet)] = {
-    headerValueByName("Authorization").flatMap { token =>
+    headerValueByName("Authorization").flatMap(header => {
+      val token = extractBearerToken(header)
       onSuccess(authService.authenticate(token)).flatMap {
         case Right(claims) => provide(claims)
-        case Left(error)   => reject(Rejections.authorizationFailed)
+        case Left(error) => reject(Rejections.authorizationFailed)
       }
-    }
+    })
   }
 
   protected val authService: AuthService

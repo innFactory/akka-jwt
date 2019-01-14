@@ -8,6 +8,6 @@ import com.nimbusds.jwt.JWTClaimsSet
 class AutoValidator extends JwtValidator {
   override def validate(jwtToken: JwtToken) =
     Right(
-      (JwtToken("auto-validated"),
+      (jwtToken,
        JWTClaimsSet.parse("{\"sub\" : \"auto-validated\"}")))
 }

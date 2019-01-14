@@ -16,7 +16,15 @@ class JwtAuthDirectivesTest extends WordSpec with Matchers with JwtAuthDirective
       val authRoute =  get { authenticate { token => complete(token._1.content) } }
 
       Get() ~> addHeader("Authorization", "any") ~> authRoute ~> check  {
-        responseAs[String] shouldBe("auto-validated")
+        responseAs[String] shouldBe("any")
+      }
+    }
+    "extract token from 'Bearer' type authorization header" in {
+      //like the runtime, instantiate route once
+      val authRoute =  get { authenticate { token => complete(token._1.content) } }
+
+      Get() ~> addHeader("Authorization", "Bearer mytoken") ~> authRoute ~> check  {
+        responseAs[String] shouldBe("mytoken")
       }
     }
   }
