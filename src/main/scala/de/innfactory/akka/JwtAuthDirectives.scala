@@ -1,6 +1,7 @@
 package de.innfactory.akka
 
-import akka.http.javadsl.server.Rejections
+import akka.http.scaladsl.model.headers.HttpChallenge
+import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.Directive1
 import akka.http.scaladsl.server.directives.{
   BasicDirectives,
@@ -23,7 +24,7 @@ trait JwtAuthDirectives {
   private def extractBearerToken(header: String): String = {
     header match {
       case headerTokenRegex(token) => token
-      case token => token
+      case token                   => token
     }
   }
 
@@ -32,7 +33,11 @@ trait JwtAuthDirectives {
       val token = extractBearerToken(header)
       onSuccess(authService.authenticate(token)).flatMap {
         case Right(claims) => provide(claims)
-        case Left(error) => reject(Rejections.authorizationFailed)
+        case Left(error) =>
+          reject(
+            AuthenticationFailedRejection(
+              AuthenticationFailedRejection.CredentialsRejected,
+              HttpChallenge("JWT", None)))
       }
     })
   }

@@ -5,3 +5,4 @@ project/target/*
 project/project/*
 .idea/*
 .zshrc
+.DS_Store

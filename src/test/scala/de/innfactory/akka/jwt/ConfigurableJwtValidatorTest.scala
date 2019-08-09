@@ -11,8 +11,8 @@ import com.nimbusds.jose.proc.SecurityContext
 import com.nimbusds.jose.{JWSAlgorithm, JWSHeader}
 import com.nimbusds.jwt.proc.BadJWTException
 import com.nimbusds.jwt.{JWTClaimsSet, SignedJWT}
-import org.scalatest.prop.PropertyChecks
 import org.scalatest.{Matchers, WordSpec}
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
 /**
   * Some parts of these tests code is inspired and/or copy/paste from Nimbus tests code, here:
@@ -25,7 +25,7 @@ import org.scalatest.{Matchers, WordSpec}
 class ConfigurableJwtValidatorSpec
     extends WordSpec
     with Matchers
-    with PropertyChecks {
+    with ScalaCheckPropertyChecks {
 
   import Generators._
   import ProvidedAdditionalChelcks._
@@ -96,8 +96,8 @@ class ConfigurableJwtValidatorSpec
             forAll(jwkSourceGen(keyPair)) {
               jwkSource: JWKSource[SecurityContext] =>
                 val res = ConfigurableJwtValidator(jwkSource).validate(token)
-                res.right.map(_._1) shouldBe Right(token)
-                res.right.map(_._2).toString shouldBe Right(claims).toString
+                res.map(_._1) shouldBe Right(token)
+                res.map(_._2).toString shouldBe Right(claims).toString
             }
           }
         }
@@ -124,11 +124,11 @@ class ConfigurableJwtValidatorSpec
                 correctlyConfiguredValidator.validate(token) shouldBe Left(
                   MissingExpirationClaim)
                 val res = nonConfiguredValidator.validate(token)
-                res.right.map(_._1) shouldBe Right(token)
+                res.map(_._1) shouldBe Right(token)
                 // Without the `.toString` hack, we have this stupid error:
                 //  `Right({"sub":"alice","iss":"https:\/\/openid.c2id.com"}) was not equal to Right({"sub":"alice","iss":"https:\/\/openid.c2id.com"})`
                 // Equality on Claims should not be well defined.
-                res.right.map(_._2).toString shouldBe Right(claims).toString
+                res.map(_._2).toString shouldBe Right(claims).toString
             }
           }
         }
@@ -179,8 +179,8 @@ class ConfigurableJwtValidatorSpec
                                                List(requireExpirationClaim))
 
                   val res = correctlyConfiguredValidator.validate(token)
-                  res.right.map(_._1) shouldBe Right(token)
-                  res.right.map(_._2).toString shouldBe Right(claims).toString
+                  res.map(_._1) shouldBe Right(token)
+                  res.map(_._2).toString shouldBe Right(claims).toString
               }
             }
           }
@@ -211,8 +211,8 @@ class ConfigurableJwtValidatorSpec
               correctlyConfiguredValidator.validate(token) shouldBe Left(
                 InvalidTokenUseClaim)
               val res = nonConfiguredValidator.validate(token)
-              res.right.map(_._1) shouldBe Right(token)
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._1) shouldBe Right(token)
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }
@@ -238,8 +238,8 @@ class ConfigurableJwtValidatorSpec
               correctlyConfiguredValidator.validate(token) shouldBe Left(
                 InvalidTokenUseClaim)
               val res = nonConfiguredValidator.validate(token)
-              res.right.map(_._1) shouldBe Right(token)
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._1) shouldBe Right(token)
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }
@@ -262,8 +262,8 @@ class ConfigurableJwtValidatorSpec
                                          additionalChecks =
                                            List(requireTokenUseClaim(tokenUse)))
               val res = correctlyConfiguredValidator.validate(token)
-              res.right.map(_._1) shouldBe Right(token)
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._1) shouldBe Right(token)
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }
@@ -289,8 +289,8 @@ class ConfigurableJwtValidatorSpec
               correctlyConfiguredValidator.validate(token) shouldBe Left(
                 InvalidTokenIssuerClaim)
               val res = nonConfiguredValidator.validate(token)
-              res.right.map(_._1) shouldBe Right(token)
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._1) shouldBe Right(token)
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }
@@ -314,8 +314,8 @@ class ConfigurableJwtValidatorSpec
               correctlyConfiguredValidator.validate(token) shouldBe Left(
                 InvalidTokenIssuerClaim)
               val res = nonConfiguredValidator.validate(token)
-              res.right.map(_._1) shouldBe Right(token)
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._1) shouldBe Right(token)
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }
@@ -335,8 +335,8 @@ class ConfigurableJwtValidatorSpec
                                          additionalChecks =
                                            List(requiredIssuerClaim(issuer)))
                   .validate(token)
-              res.right.map(_._1) shouldBe Right(token)
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._1) shouldBe Right(token)
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }
@@ -362,11 +362,11 @@ class ConfigurableJwtValidatorSpec
               correctlyConfiguredValidator.validate(token) shouldBe Left(
                 InvalidTokenSubject)
               val res = nonConfiguredValidator.validate(token)
-              res.right.map(_._1) shouldBe Right(token)
+              res.map(_._1) shouldBe Right(token)
               // Without the `.toString` hack, we have this stupid error:
               //  `Right({"sub":"alice","iss":"https:\/\/openid.c2id.com"}) was not equal to Right({"sub":"alice","iss":"https:\/\/openid.c2id.com"})`
               // Equality on Claims should not be well defined.
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }
@@ -391,8 +391,8 @@ class ConfigurableJwtValidatorSpec
               correctlyConfiguredValidator.validate(token) shouldBe Left(
                 InvalidTokenSubject)
               val res = nonConfiguredValidator.validate(token)
-              res.right.map(_._1) shouldBe Right(token)
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._1) shouldBe Right(token)
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }
@@ -413,8 +413,8 @@ class ConfigurableJwtValidatorSpec
                                          additionalChecks =
                                            List(requiredNonEmptySubject))
                   .validate(token)
-              res.right.map(_._1) shouldBe Right(token)
-              res.right.map(_._2).toString shouldBe Right(claims).toString
+              res.map(_._1) shouldBe Right(token)
+              res.map(_._2).toString shouldBe Right(claims).toString
           }
         }
       }

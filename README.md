@@ -10,9 +10,16 @@ Library for jwt authentication with akka
 ## Information
 This library provides you an akka directive for your route to authenticate your user with jwt. the jwt implementation adapts nimbus JOSE + JWT.
 
+### Changelog
+
+#### 1.2.0
+
+#### 1.0.0
+- Initial Release
+
 ### Setup
 ```scala
-libraryDependencies += "de.innFactory" %% "akka-jwt" % "1.1.1"
+libraryDependencies += "de.innFactory" %% "akka-jwt" % "1.2.0"
 ```
 
 After that you must extend your akka-http Route with ```JwtAuthDirectives```. Then just implement a AuthService ```protected val authService: AuthService```
@@ -95,6 +102,6 @@ https://github.com/innFactory/aws-session-token-gui
 * Tobias Jonas
 * Jules Ivanic 
 
-Copyright (C) 2017 [innFactory Cloud- & DataEngineering](https://innFactory.de)
+Copyright (C) 2019 [innFactory Cloud- & DataEngineering](https://innFactory.de)
 
 Published under the Apache 2 License.
